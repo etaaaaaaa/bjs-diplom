@@ -38,7 +38,8 @@ moneyManager.addMoneyCallback = function (data) {
             ProfileWidget.showProfile(answer.data);
             moneyManager.setMessage(answer.success ,'Success! Money added');
         } else {
-            moneyManager.setMessage(!answer.success, answer.data);
+            // moneyManager.setMessage(!answer.success, answer.data);
+            moneyManager.setMessage(false, answer.error);
         }
     })
 }
@@ -49,7 +50,7 @@ moneyManager.conversionMoneyCallback = function (data) {
             ProfileWidget.showProfile(answer.data);
             moneyManager.setMessage(answer.success ,'Success! Conversion happened');
         } else {
-            moneyManager.setMessage(!answer.success, answer.data);
+            moneyManager.setMessage(false, answer.error);
         }
     })
 }
@@ -60,7 +61,7 @@ moneyManager.sendMoneyCallback = function (data) {
             ProfileWidget.showProfile(answer.data);
             moneyManager.setMessage(answer.success ,'Success! Money sent');
         } else {
-            moneyManager.setMessage(!answer.success, answer.data);
+            moneyManager.setMessage(false, answer.error);
         }
     })
 }
@@ -73,7 +74,7 @@ ApiConnector.getFavorites( answer => {
     if (answer.success) {
         favorites.clearTable();
         favorites.fillTable(answer.data);
-        moneyManager.updateUsersList(answer.data);
+        // moneyManager.updateUsersList(answer.data);
     }
 })
 
@@ -82,9 +83,10 @@ favorites.addUserCallback = function (data) {
         if (answer.success) {
             favorites.clearTable();
             favorites.fillTable(answer.data);
+            moneyManager.updateUsersList(answer.data); //NEW
             favorites.setMessage(answer.success, 'Success! User added');
         } else {
-            favorites.setMessage(!answer.success, answer.data);
+            favorites.setMessage(false, answer.error);
         }
     })
 }
@@ -94,9 +96,10 @@ favorites.removeUserCallback = function (data) {
         if (answer.success) {
             favorites.clearTable();
             favorites.fillTable(answer.data);
+            moneyManager.updateUsersList(answer.data); //NEW
             favorites.setMessage(answer.success, 'Success! User removed');
         } else {
-            favorites.setMessage(!answer.success, answer.data);
+            favorites.setMessage(false, answer.error); // NEW
         }
     })
 }
