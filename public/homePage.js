@@ -36,7 +36,7 @@ moneyManager.addMoneyCallback = function (data) {
     ApiConnector.addMoney(data, answer => {
         if (answer.success) {
             ProfileWidget.showProfile(answer.data);
-            moneyManager.setMessage(answer.success ,'Success! Money added');
+            moneyManager.setMessage(answer.success ,'Деньги добавлены');
         } else {
             // moneyManager.setMessage(!answer.success, answer.data);
             moneyManager.setMessage(false, answer.error);
@@ -48,7 +48,7 @@ moneyManager.conversionMoneyCallback = function (data) {
     ApiConnector.convertMoney(data, answer => {
         if (answer.success) {
             ProfileWidget.showProfile(answer.data);
-            moneyManager.setMessage(answer.success ,'Success! Conversion happened');
+            moneyManager.setMessage(answer.success ,'Деньги переведены');
         } else {
             moneyManager.setMessage(false, answer.error);
         }
@@ -59,7 +59,7 @@ moneyManager.sendMoneyCallback = function (data) {
     ApiConnector.transferMoney(data, answer => {
         if (answer.success) {
             ProfileWidget.showProfile(answer.data);
-            moneyManager.setMessage(answer.success ,'Success! Money sent');
+            moneyManager.setMessage(answer.success ,'Деньги отправлены');
         } else {
             moneyManager.setMessage(false, answer.error);
         }
@@ -74,7 +74,7 @@ ApiConnector.getFavorites( answer => {
     if (answer.success) {
         favorites.clearTable();
         favorites.fillTable(answer.data);
-        // moneyManager.updateUsersList(answer.data);
+        moneyManager.updateUsersList(answer.data);
     }
 })
 
@@ -84,7 +84,7 @@ favorites.addUserCallback = function (data) {
             favorites.clearTable();
             favorites.fillTable(answer.data);
             moneyManager.updateUsersList(answer.data); //NEW
-            favorites.setMessage(answer.success, 'Success! User added');
+            favorites.setMessage(answer.success, 'Пользователь добавлен');
         } else {
             favorites.setMessage(false, answer.error);
         }
@@ -97,7 +97,7 @@ favorites.removeUserCallback = function (data) {
             favorites.clearTable();
             favorites.fillTable(answer.data);
             moneyManager.updateUsersList(answer.data); //NEW
-            favorites.setMessage(answer.success, 'Success! User removed');
+            favorites.setMessage(answer.success, 'Пользователь удален');
         } else {
             favorites.setMessage(false, answer.error); // NEW
         }
